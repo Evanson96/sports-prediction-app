@@ -1,0 +1,31 @@
+{
+  "name": "kenya-sports-predictor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full-stack AI sports prediction dashboard for Kenyan bettors with real, derived, and clearly labelled missing data adapters.",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "server": "node --watch server/index.js",
+    "client": "vite --config client/vite.config.js --host 127.0.0.1",
+    "build": "vite build --config client/vite.config.js",
+    "start": "node server/index.js",
+    "test": "node --test tests/*.test.js",
+    "ci": "npm run test && npm run build && npm audit --audit-level=moderate"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^6.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^8.0.16"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17"
+  }
+}

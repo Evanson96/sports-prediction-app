@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .ui-card {
+    @apply rounded border border-ink/10 bg-white shadow-sm;
+  }
+
+  .ui-card-pad {
+    @apply p-4;
+  }
+
+  .ui-button-primary {
+    @apply rounded bg-pitch px-4 py-3 text-sm font-black text-white transition hover:bg-ink disabled:cursor-not-allowed disabled:opacity-70;
+  }
+
+  .ui-button-secondary {
+    @apply rounded border border-ink/10 bg-white px-3 py-2 text-sm font-black text-ink/65 transition hover:border-pitch/30 hover:bg-pitch/5 hover:text-pitch disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .ui-icon-button {
+    @apply rounded p-2 text-ink/55 transition hover:bg-ink/5 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .ui-input {
+    @apply rounded border border-ink/15 bg-white px-3 py-2 text-sm font-semibold text-ink outline-pitch;
+  }
+
+  .ui-input-error {
+    @apply border-red-400;
+  }
+
+  .ui-label {
+    @apply grid gap-1 text-sm font-semibold;
+  }
+
+  .ui-chip {
+    @apply rounded border border-ink/10 bg-ink/5 px-2 py-1 text-xs font-black text-ink/60;
+  }
+
+  .tap-card {
+    @apply rounded border border-ink/10 bg-white p-3 text-left transition hover:border-pitch/40 hover:bg-pitch/5;
+  }
+
+  .tap-card-active {
+    @apply border-pitch bg-pitch/5;
+  }
+}
+
+:root {
+  color: #10201b;
+  background: #f6f7f2;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.meter {
+  background:
+    linear-gradient(90deg, #b6532f 0%, #f7b538 50%, #0f6b45 100%);
+}
