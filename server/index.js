@@ -1,6 +1,8 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import fs from 'fs';
+import path from 'path';
 import { fileURLToPath } from 'url';
 import analyticsRoutes from './routes/analyticsRoutes.js';
 import authRoutes from './routes/authRoutes.js';
@@ -16,6 +18,8 @@ import { securityHeaders } from './middleware/securityHeaders.js';
 import { logger } from './utils/logger.js';
 
 const PORT = process.env.PORT || 5000;
+const distPath = fileURLToPath(new URL('../dist', import.meta.url));
+const distIndexPath = path.join(distPath, 'index.html');
 const CLIENT_ORIGINS = (process.env.CLIENT_ORIGINS || 'http://127.0.0.1:5173,http://localhost:5173')
   .split(',')
   .map((origin) => origin.trim())
@@ -86,6 +90,18 @@ export const createApp = () => {
   app.use('/api/fixtures', fixtureRoutes);
   app.use('/api/matches', matchRoutes);
   app.use('/api/sources', sourceRoutes);
+
+  if (fs.existsSync(distIndexPath)) {
+    app.use(express.static(distPath));
+    app.get('*', (req, res, next) => {
+      if (req.path.startsWith('/api/')) {
+        next();
+        return;
+      }
+
+      res.sendFile(distIndexPath);
+    });
+  }
 
   app.use((req, _res, next) => {
     const error = new Error(`Route not found: ${req.method} ${req.path}`);
