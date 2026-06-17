@@ -18,7 +18,14 @@ export const securityHeaders = (_req, res, next) => {
       "base-uri 'self'",
       "frame-ancestors 'none'",
       "object-src 'none'",
+      "script-src 'self'",
+      "script-src-elem 'self'",
+      "style-src 'self' 'unsafe-inline'",
+      "style-src-elem 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob: https:",
+      "font-src 'self' data:",
       `connect-src 'self' ${origins}`,
+      "manifest-src 'self'",
     ].join('; '),
   );
 

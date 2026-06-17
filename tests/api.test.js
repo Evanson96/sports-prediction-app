@@ -60,6 +60,23 @@ test('health endpoint works for allowed origin', async () => {
   assert.equal(data.ok, true);
 });
 
+test('root serves frontend shell when production build exists', async () => {
+  const distIndex = path.resolve('dist/index.html');
+  if (!fs.existsSync(distIndex)) {
+    return;
+  }
+
+  const response = await fetch(`${baseUrl}/`, {
+    headers: { Origin: 'http://127.0.0.1:5173' },
+  });
+  const html = await response.text();
+
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get('content-type') || '', /text\/html/i);
+  assert.match(html, /<div id="root"><\/div>/);
+  assert.match(html, /Kenya Sports Predictor/);
+});
+
 test('blocked CORS origin returns 403', async () => {
   const response = await fetch(`${baseUrl}/api/health`, {
     headers: { Origin: 'https://blocked.example' },
